@@ -17,10 +17,13 @@
            </div>
            <button class="btn btn-primary" v-on:click="submit()">Login</button>
        </form>
+       <Child />
     </div>
 </template>
+
 <script>
-import Vue from 'vue/dist/vue.js'
+import Vue from 'vue/dist/vue.js';
+import Child from './Child';
 import axios from 'axios';
 export default {
     data(){ 
@@ -30,26 +33,39 @@ export default {
             age:'23'
         }
     },
+    mounted(){
+        // this.$root.$on('register axios message',(arg1,arg2) =>{
+        //     console.log('arg1 - ',arg1);
+        //     console.log('arg2 - ',arg2);
+        // });
+    },
     methods :{
         submit(){
             console.log("Hello world submitted");
             console.log('Username - ',this.userName);
             console.log('Password - ',this.passWord);
-            axios.post('http://dummy.restapiexample.com/api/v1/create',
-            {
-                name : this.name,
-                salary : this.salary,
-                age : this.age
-            }
-            ).then(
-                res => {
-                    console.log(res.data);
-                },
-                err => {
-                    console.log(err);
-                }
-            )
+            // axios.post('http://dummy.restapiexample.com/api/v1/create',
+            // {
+            //     name : this.name,
+            //     salary : this.salary,
+            //     age : this.age
+            // }
+            // ).then(
+            //     res => {
+            //         console.log(res.data);
+            //     },
+            //     err => {
+            //         console.log(err);
+            //     }
+            // )
+            this.$root.$on('register axios message', (arg1,arg2)=>{
+                console.log('arg1 -',arg1);
+                console.log('arg2 -',arg2);
+            });
         }
+    },
+    components:{
+        Child,
     } 
 }
 </script>
